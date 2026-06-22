@@ -5,12 +5,13 @@ production:
   password: <%= scope.lookupvar('redmine::database_password') %>
   host: <%= scope.lookupvar('redmine::database_server') %>
   encoding: <%= scope.lookupvar('redmine::database_encoding') %>
-  <% if @scope.lookupvar('redmine::database_encoding') and ! @scope.lookupvar('redmine::database_encoding').empty? -%>
-    variables:
-    <%- scope.lookupvar('redmine::database_encoding').each do |key, value| -%>
-      <%= key %>: <%= value %> 
-    <%- end -%>
-  <% end -%>
+<% @variables = scope['redmine::database_variables'] -%>
+<% if @variables and ! @variables.empty? -%>
+  variables:
+  <%- @variables.each do |key, value| -%>
+    <%= key %>: <%= value %>
+  <%- end -%>
+<% end -%>
 
 development:
   adapter: <%= scope.lookupvar('redmine::params::real_adapter') %>
@@ -19,10 +20,4 @@ development:
   password: <%= scope.lookupvar('redmine::database_password') %>
   host: <%= scope.lookupvar('redmine::database_server') %>
   encoding: <%= scope.lookupvar('redmine::database_encoding') %>
-  <% if @scope.lookupvar('redmine::database_encoding') and ! @scope.lookupvar('redmine::database_encoding').empty? -%>
-    variables:
-    <%- scope.lookupvar('redmine::database_encoding').each do |key, value| -%>
-      <%= key %>: <%= value %> 
-    <%- end -%>
-  <% end -%>
 
