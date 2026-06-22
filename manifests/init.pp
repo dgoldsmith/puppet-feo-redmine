@@ -34,6 +34,8 @@
 # @param database_adapter
 #   Database adapter to use for database configuration.
 #   Can be either 'mysql' for ruby 1.8, 'mysql2' for ruby 1.9 or 'postgresql'.
+# @param database_variables
+#   Optional hash of variables to pass to the database config
 # @param email_delivery_method
 #   The method Redmine uses to deliver email.
 # @param smtp_server
@@ -96,6 +98,7 @@ class redmine (
   String                   $database_server       = 'localhost',
   String                   $database_user         = 'redmine',
   String                   $database_password     = 'redmine',
+  Optional[Hash]           $database_variables    = {},
   String                   $production_database   = 'redmine',
   String                   $development_database  = 'redmine_development',
   Optional[Enum['mysql','mysql2','postgresql']] $database_adapter = undef,
