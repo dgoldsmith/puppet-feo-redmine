@@ -20,4 +20,11 @@ development:
   password: <%= scope.lookupvar('redmine::database_password') %>
   host: <%= scope.lookupvar('redmine::database_server') %>
   encoding: <%= scope.lookupvar('redmine::database_encoding') %>
+<% @variables = scope['redmine::database_variables'] -%>
+<% if @variables and ! @variables.empty? -%>
+  variables:
+  <%- @variables.each do |key, value| -%>
+    <%= key %>: <%= value %>
+  <%- end -%>
+<% end -%>
 
