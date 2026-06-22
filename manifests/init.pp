@@ -14,6 +14,8 @@
 #   to a valid tar.gz archive.
 #   To use the svn provider you have to provide the full url to the
 #   tag or branch you want to download and unset the version.
+# @param database_encoding
+#   Database encoding.
 # @param database_server
 #   Database server to use.
 #   If server is not on localhost, the database and user must
@@ -90,6 +92,7 @@ class redmine (
   String                   $bundle,
   Optional[String]         $version               = undef,
   Stdlib::HTTPUrl          $download_url          = 'https://github.com/redmine/redmine',
+  String                   $database_encoding     = 'utf8',
   String                   $database_server       = 'localhost',
   String                   $database_user         = 'redmine',
   String                   $database_password     = 'redmine',

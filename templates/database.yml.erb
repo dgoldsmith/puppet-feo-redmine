@@ -4,7 +4,7 @@ production:
   username: <%= scope.lookupvar('redmine::database_user') %>
   password: <%= scope.lookupvar('redmine::database_password') %>
   host: <%= scope.lookupvar('redmine::database_server') %>
-  encoding: utf8
+  encoding: <%= scope.lookupvar('redmine::database_encoding') %>
 
 development:
   adapter: <%= scope.lookupvar('redmine::params::real_adapter') %>
@@ -12,4 +12,5 @@ development:
   username: <%= scope.lookupvar('redmine::database_user') %>
   password: <%= scope.lookupvar('redmine::database_password') %>
   host: <%= scope.lookupvar('redmine::database_server') %>
-  encoding: utf8
+  encoding: <%= scope.lookupvar('redmine::database_encoding') %>
+
