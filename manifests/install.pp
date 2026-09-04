@@ -77,8 +77,7 @@ class redmine::install {
     require => [$bundler_require, Package['make'], Package['gcc'], Package[$packages]],
     notify  => Exec['rails_migrations'],
   }
-  -->
-  exec { 'redmine-apache-ownership':
+  -> exec { 'redmine-apache-ownership':
     command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir} && /bin/chmod -R g+w ${redmine::install_dir}",
   }
 
