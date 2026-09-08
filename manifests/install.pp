@@ -72,15 +72,15 @@ class redmine::install {
   }
 
   exec { 'bundle_redmine':
-    command => "${redmine::bundle} install --gemfile ${redmine::install_dir}/Gemfile --path ${redmine::install_dir}/vendor/bundle --without ${without_gems}",
+    command => "${redmine::bundle} install --gemfile ${redmine::install_dir}/Gemfile --path ${redmine::install_dir}/vendor/bundle --without ${without_gems} && /bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir}/*",
     creates => "${redmine::install_dir}/Gemfile.lock",
     require => [$bundler_require, Package['make'], Package['gcc'], Package[$packages]],
     notify  => Exec['rails_migrations'],
   }
-  -> exec { 'redmine-apache-ownership':
-    #command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir} && /bin/chmod -R g+w ${redmine::install_dir}",
-    command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir}/*",
-  }
+#  -> exec { 'redmine-apache-ownership':
+#    #command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir} && /bin/chmod -R g+w ${redmine::install_dir}",
+#    command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir}/*",
+#  }
 
   create_resources('redmine::plugin', $redmine::plugins)
 
