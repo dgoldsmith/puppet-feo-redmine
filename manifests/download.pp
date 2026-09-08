@@ -15,6 +15,7 @@ class redmine::download {
       provider => $redmine::provider,
       path     => $redmine::install_dir,
       require  => Package[$redmine::params::provider_package],
+      user     => $apache::params::user,
     }
   }
   else {

@@ -55,6 +55,7 @@ define redmine::plugin (
     source   => $source,
     provider => $provider,
     notify   => $notify,
+    user     => $apache::params::user,
     require  => [Package[$provider_package]
     , Exec['bundle_redmine']],
   }

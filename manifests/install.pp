@@ -78,7 +78,8 @@ class redmine::install {
     notify  => Exec['rails_migrations'],
   }
   -> exec { 'redmine-apache-ownership':
-    command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir} && /bin/chmod -R g+w ${redmine::install_dir}",
+    #command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir} && /bin/chmod -R g+w ${redmine::install_dir}",
+    command => "/bin/chown -R ${apache::params::user}:${apache::params::group} ${redmine::install_dir}/*",
   }
 
   create_resources('redmine::plugin', $redmine::plugins)
